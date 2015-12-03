@@ -36,11 +36,12 @@ public class BouncingBall {
             double posicaoHorizontalBarra = 0;
             double posicaoHorizontalBola = 0.480, posicaoVerticalBola = 0.860;  // position
             double vx = 0.015, vy = 0.023;     // velocity
-            double radius = 0.05;    
+            double radius = 0.05;
+            int nivel = 35;
 
             // main animation loop
             while (true) {
-                
+
                 if (StdDraw.isKeyPressed(KeyEvent.VK_LEFT)) {
                     //Movimenta a barra, caso nao esteja na parede
                     if (posicaoHorizontalBarra >= -0.74) {
@@ -56,26 +57,23 @@ public class BouncingBall {
                 //Impede que a bola passe pelas laterais
                 if (Math.abs(posicaoHorizontalBola) > 1.0 - radius) {
                     vx = -vx;
-                    System.out.println(Math.abs(posicaoHorizontalBola));
                 }
 
                 //Imprede que a bola passe pra cima
                 if (posicaoVerticalBola > 1.0 - radius) {
                     vy = -vy;
-                    System.out.println(posicaoVerticalBola);
                 }
 
                 //Compara as posicoes da bola e da barra, caso forem iguais, rebate
                 if (((posicaoVerticalBola - radius) <= -0.947) && posicaoHorizontalBola < (posicaoHorizontalBarra + 0.25)
                         && (posicaoHorizontalBola > (posicaoHorizontalBarra - 0.25))) {
-                            vy = -vy;
-                            System.out.println(posicaoVerticalBola + "voltou");
+                    vy = -vy;
+                    System.out.println(posicaoVerticalBola + "voltou");
+                    nivel --;
+                } else if ((posicaoVerticalBola) < -0.944) {
+                    System.out.println("perdeu");
+                    break;
                 }
-                else if ((posicaoVerticalBola) < -0.944) {
-                            System.out.println("perdeu");
-                            break;
-                }
-                
 
                 // update position
                 posicaoHorizontalBola = posicaoHorizontalBola + vx;
@@ -90,7 +88,8 @@ public class BouncingBall {
                 StdDraw.filledCircle(posicaoHorizontalBola, posicaoVerticalBola, radius);
 
                 // display and pause for 20 ms
-                StdDraw.show(49);
+                StdDraw.show(nivel);
+                System.out.println(nivel);
             }
         }
     }
