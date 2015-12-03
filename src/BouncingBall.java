@@ -33,70 +33,64 @@ public class BouncingBall {
 
         @Override
         public void run() {
-            double x = 0;
-            double rx = 0.480, ry = 0.860;  // position
+            double posicaoHorizontalBarra = 0;
+            double posicaoHorizontalBola = 0.480, posicaoVerticalBola = 0.860;  // position
             double vx = 0.015, vy = 0.023;     // velocity
-            double radius = 0.05;              // radius
+            double radius = 0.05;    
 
             // main animation loop
             while (true) {
+                
                 if (StdDraw.isKeyPressed(KeyEvent.VK_LEFT)) {
-                    //margem da barra, nao deixa a barra passar o cenario
-                    if (x >= -0.74) {
-                        x -= 0.02;
+                    //Movimenta a barra, caso nao esteja na parede
+                    if (posicaoHorizontalBarra >= -0.74) {
+                        posicaoHorizontalBarra -= 0.02;
                     }
                 } else if (StdDraw.isKeyPressed(KeyEvent.VK_RIGHT)) {
-                    //margem da barra, nao deixa a barra passar o cenario
-                    if (x <= 0.74) {
-                        x += 0.02;
+                    //Movimenta a barra, caso nao esteja na parede
+                    if (posicaoHorizontalBarra <= 0.74) {
+                        posicaoHorizontalBarra += 0.02;
                     }
                 }
 
-                //y = vertical
-                // x = horizontal
-                // nao deixa sair das laterais
-                if (Math.abs(rx + vx) > 1.0 - radius) {
+                //Impede que a bola passe pelas laterais
+                if (Math.abs(posicaoHorizontalBola) > 1.0 - radius) {
                     vx = -vx;
-                    System.out.println(rx);
+                    System.out.println(Math.abs(posicaoHorizontalBola));
                 }
 
-                // nao deixa sair em cima
-                if (Math.abs(ry + vy) > 1.0 - radius) {
+                //Imprede que a bola passe pra cima
+                if (posicaoVerticalBola > 1.0 - radius) {
                     vy = -vy;
-                    System.out.println(ry);
+                    System.out.println(posicaoVerticalBola);
                 }
-
-                double posicaoBarraHorizontal = Math.abs(x) + 0.25;
-                double posicaoBolaHorizontal = Math.abs(rx);
 
                 //Compara as posicoes da bola e da barra, caso forem iguais, rebate
-                if (((ry + vy) < -0.850) && posicaoBolaHorizontal < (posicaoBarraHorizontal + 0.035)
-                        && (posicaoBolaHorizontal > (posicaoBarraHorizontal - 0.35))) {
-                            posicaoBolaHorizontal = -posicaoBolaHorizontal;
+                if (((posicaoVerticalBola - radius) <= -0.947) && posicaoHorizontalBola < (posicaoHorizontalBarra + 0.25)
+                        && (posicaoHorizontalBola > (posicaoHorizontalBarra - 0.25))) {
                             vy = -vy;
-                            System.out.println(vy);
+                            System.out.println(posicaoVerticalBola + "voltou");
                 }
-                if (((ry + vy) < -0.900) && rx > (x + 0.035)
-                        && (rx < (x - 0.35))) {
-                            System.out.println("se fudep trouxa, menos uma vida");
+                else if ((posicaoVerticalBola) < -0.944) {
+                            System.out.println("perdeu");
                             break;
-                    }
+                }
+                
 
                 // update position
-                rx = rx + vx;
-                ry = ry + vy;
-
+                posicaoHorizontalBola = posicaoHorizontalBola + vx;
+                posicaoVerticalBola = posicaoVerticalBola + vy;
                 // clear the background
                 StdDraw.clear(StdDraw.WHITE);
 
                 // draw ball on the screen
                 StdDraw.setPenColor(StdDraw.RED);
-                StdDraw.filledRectangle(x, -0.935, 0.25, 0.035);
+                StdDraw.filledRectangle(posicaoHorizontalBarra, -0.999, 0.25, 0.055);
                 StdDraw.setPenColor(StdDraw.BLACK);
-                StdDraw.filledCircle(rx, ry, radius);
+                StdDraw.filledCircle(posicaoHorizontalBola, posicaoVerticalBola, radius);
 
                 // display and pause for 20 ms
-                StdDraw.show(59);
+                StdDraw.show(49);
             }
         }
     }
