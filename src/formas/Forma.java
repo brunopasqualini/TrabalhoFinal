@@ -1,5 +1,7 @@
 package formas;
 
+import java.awt.Color;
+
 /**
  * Classe que possui os comportamentos básico da forma
  * @author Bruno
@@ -15,6 +17,24 @@ public abstract class Forma {
      * Posição Y
      */
     private double y;
+    
+    /**
+     * Cor da forma
+     */
+    private Color cor;
+    
+    /**
+     * Descrição da forma
+     */
+    private String descricao;
+
+    /**
+     * Construtor
+     * @param descricao - Descrição da forma
+     */
+    public Forma(String descricao) {
+        this.descricao = descricao;
+    }
 
     /**
      * Retorna a posição X da forma
@@ -47,4 +67,37 @@ public abstract class Forma {
     public void setY(double y) {
         this.y = y;
     }
+
+    /**
+     * Retorna a cor da forma
+     * @return 
+     */
+    public Color getCor() {
+        return cor;
+    }
+
+    /**
+     * Seta a cor da forma
+     * @param cor 
+     */
+    public void setCor(Color cor) {
+        this.cor = cor;
+    }
+
+    /**
+     * Retorna a descrição da forma
+     * @return 
+     */
+    public String getDescricao() {
+        return descricao;
+    }
+
+    /**
+     * Seta a descrição da forma
+     * @param descricao 
+     */
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+    
 }

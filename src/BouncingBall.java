@@ -1,5 +1,4 @@
-
-import java.awt.Color;
+import tela.StdDraw;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
@@ -33,25 +32,23 @@ public class BouncingBall {
 
         @Override
         public void run() {
-            double posicaoHorizontalBarra = 0;
-            double posicaoHorizontalBola = 0.480, posicaoVerticalBola = 0.860;  // position
-            double vx = 0.015, vy = 0.023;     // velocity
+            double posicaoHorizontalBarra = 0,
+                   posicaoHorizontalBola  = 0.480, 
+                   posicaoVerticalBola    = 0.860;
+            double vx = 0.015, vy = 0.023;
             double radius = 0.05;
-            int nivel = 35;
+            int nivel = 10;
 
             // main animation loop
             while (true) {
 
-                if (StdDraw.isKeyPressed(KeyEvent.VK_LEFT)) {
-                    //Movimenta a barra, caso nao esteja na parede
-                    if (posicaoHorizontalBarra >= -0.74) {
-                        posicaoHorizontalBarra -= 0.02;
-                    }
-                } else if (StdDraw.isKeyPressed(KeyEvent.VK_RIGHT)) {
-                    //Movimenta a barra, caso nao esteja na parede
-                    if (posicaoHorizontalBarra <= 0.74) {
-                        posicaoHorizontalBarra += 0.02;
-                    }
+                //Movimenta a barra, caso nao esteja na parede
+                if (StdDraw.isKeyPressed(KeyEvent.VK_LEFT) && posicaoHorizontalBarra >= -0.75) {
+                    posicaoHorizontalBarra -= 0.02;
+                } 
+                //Movimenta a barra, caso nao esteja na parede
+                else if (StdDraw.isKeyPressed(KeyEvent.VK_RIGHT) && posicaoHorizontalBarra <= 0.75) {
+                    posicaoHorizontalBarra += 0.02;
                 }
 
                 //Impede que a bola passe pelas laterais
@@ -59,7 +56,7 @@ public class BouncingBall {
                     vx = -vx;
                 }
 
-                //Imprede que a bola passe pra cima
+                //Impede que a bola passe pra cima
                 if (posicaoVerticalBola > 1.0 - radius) {
                     vy = -vy;
                 }
@@ -69,8 +66,9 @@ public class BouncingBall {
                         && (posicaoHorizontalBola > (posicaoHorizontalBarra - 0.25))) {
                     vy = -vy;
                     System.out.println(posicaoVerticalBola + "voltou");
-                    nivel --;
-                } else if ((posicaoVerticalBola) < -0.944) {
+                    nivel--;
+                } 
+                else if ((posicaoVerticalBola) < -0.944) {
                     System.out.println("perdeu");
                     break;
                 }
@@ -87,9 +85,7 @@ public class BouncingBall {
                 StdDraw.setPenColor(StdDraw.BLACK);
                 StdDraw.filledCircle(posicaoHorizontalBola, posicaoVerticalBola, radius);
 
-                // display and pause for 20 ms
                 StdDraw.show(nivel);
-                System.out.println(nivel);
             }
         }
     }

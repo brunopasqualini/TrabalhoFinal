@@ -10,17 +10,14 @@ public class Circulo extends Forma{
      * Raio do círculo
      */
     private double raio;
-
-    /**
-     * Construtor
-     */
-    public Circulo() {}
     
     /**
      * Construtor
-     * @param raio - Raio do círculo
+     * @param descricao - Descrição da círculo
+     * @param raio      - Raio do círculo
      */
-    public Circulo(double raio) {
+    public Circulo(String descricao, double raio) {
+        super(descricao);
         this.raio = raio;
     }
 

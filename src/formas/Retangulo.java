@@ -15,18 +15,15 @@ public class Retangulo extends Forma{
      * Largura do retângulo
      */
     private double largura;
-
-    /**
-     * Construtor
-     */
-    public Retangulo() {}
     
     /**
      * Construtor
-     * @param altura  - Altura do retângulo
-     * @param largura - Largura do retângulo
+     * @param descricao - Descrição do retângulo
+     * @param altura    - Largura do retângulo
+     * @param largura   - Largura do retângulo
      */
-    public Retangulo(double altura, double largura) {
+    public Retangulo(String descricao, double altura, double largura) {
+        super(descricao);
         this.altura = altura;
         this.largura = largura;
     }
