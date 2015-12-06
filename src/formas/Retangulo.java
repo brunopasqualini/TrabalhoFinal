@@ -20,13 +20,12 @@ public class Retangulo extends Forma{
     
     /**
      * Construtor
-     * @param descricao - Descrição do retângulo
      * @param cor       - Cor do retângulo
      * @param altura    - Largura do retângulo
      * @param largura   - Largura do retângulo
      */
-    public Retangulo(String descricao, Color cor, double altura, double largura) {
-        super(descricao, cor);
+    public Retangulo(Color cor, double altura, double largura) {
+        super(cor);
         this.altura = altura;
         this.largura = largura;
     }

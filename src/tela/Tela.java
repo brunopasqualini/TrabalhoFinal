@@ -59,15 +59,16 @@ public abstract class Tela {
     }
     
     /**
-     * Busca uma forma pela sua descrição
-     * @param descricao - Descrição da forma
+     * Retorna as formas baseada no tipo
+     * @param tipo - Tipo da forma
      * @return 
      */
-    public Forma getForma(String descricao){
+    public ArrayList<Forma> getFormasByType(String tipo){
+        ArrayList<Forma> formas = new ArrayList();
         for (Forma forma : this.formas) {
-            if(forma.getDescricao().equals(descricao)) return forma;
+            if(forma.getClass().getSimpleName().toLowerCase().equals(tipo)) formas.add(forma);
         }
-        return null;
+        return formas;
     }
 
     /**
@@ -90,7 +91,7 @@ public abstract class Tela {
         }
         else if(forma instanceof Circulo){
             Circulo circulo = (Circulo) forma;
-            StdDraw.filledCircle(forma.getX(), forma.getY(), circulo.getDiametro());
+            StdDraw.filledCircle(forma.getX(), forma.getY(), circulo.getRaio());
         }
     }
 }

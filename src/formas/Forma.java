@@ -14,27 +14,30 @@ public abstract class Forma {
     private double x;
     
     /**
+     * Velocidade horizontal
+     */
+    private double velocidadeX;
+    
+    /**
      * Posição Y
      */
     private double y;
     
     /**
+     * Velocidade vertical
+     */
+    private double velocidadeY;
+    
+    /**
      * Cor da forma
      */
     private Color cor;
-    
-    /**
-     * Descrição da forma
-     */
-    private String descricao;
 
     /**
      * Construtor
-     * @param descricao - Descrição da forma
      * @param cor       - Cor da forma
      */
-    public Forma(String descricao, Color cor) {
-        this.descricao = descricao;
+    public Forma(Color cor) {
         this.cor       = cor;
     }
 
@@ -49,9 +52,29 @@ public abstract class Forma {
     /**
      * Seta a posição X da forma
      * @param x 
+     * @return this
      */
-    public void setX(double x) {
+    public Forma setX(double x) {
         this.x = x;
+        return this;
+    }
+
+    /**
+     * Retorna a velocidade horizontal da forma
+     * @return 
+     */
+    public double getVelocidadeX() {
+        return velocidadeX;
+    }
+
+    /**
+     * Seta a velocidade horizontal da forma
+     * @param velocidade 
+     * @return this
+     */
+    public Forma setVelocidadeX(double velocidade) {
+        this.velocidadeX = velocidade;
+        return this;
     }
 
     /**
@@ -64,12 +87,32 @@ public abstract class Forma {
 
     /**
      * Seta a posição Y da forma
-     * @param y 
+     * @param y
+     * @return this
      */
-    public void setY(double y) {
+    public Forma setY(double y) {
         this.y = y;
+        return this;
     }
 
+    /**
+     * Retorna a velocidade vertical da forma
+     * @return 
+     */
+    public double getVelocidadeY() {
+        return velocidadeY;
+    }
+
+    /**
+     * Seta a velocidade vertical da forma
+     * @param velocidade 
+     * @return this
+     */
+    public Forma setVelocidadeY(double velocidade) {
+        this.velocidadeY = velocidade;
+        return this;
+    }
+    
     /**
      * Retorna a cor da forma
      * @return 
@@ -81,25 +124,11 @@ public abstract class Forma {
     /**
      * Seta a cor da forma
      * @param cor 
+     * @return this
      */
-    public void setCor(Color cor) {
+    public Forma setCor(Color cor) {
         this.cor = cor;
-    }
-
-    /**
-     * Retorna a descrição da forma
-     * @return 
-     */
-    public String getDescricao() {
-        return descricao;
-    }
-
-    /**
-     * Seta a descrição da forma
-     * @param descricao 
-     */
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+        return this;
     }
     
 }

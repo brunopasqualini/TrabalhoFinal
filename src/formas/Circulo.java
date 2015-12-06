@@ -9,35 +9,34 @@ import java.awt.Color;
 public class Circulo extends Forma{
     
     /**
-     * Diâmetro do círculo
+     * Raio do círculo
      */
-    private double diametro;
+    private double raio;
     
     /**
      * Construtor
-     * @param descricao - Descrição do círculo
      * @param cor       - Cor do círculo
-     * @param diametro  - Diâmetro do círculo
+     * @param raio      - Raio do círculo
      */
-    public Circulo(String descricao, Color cor, double diametro) {
-        super(descricao, cor);
-        this.diametro = diametro;
+    public Circulo(Color cor, double raio) {
+        super(cor);
+        this.raio = raio;
     }
 
     /**
      * Retorna o diâmetro do círculo
      * @return 
      */
-    public double getDiametro() {
-        return diametro;
+    public double getRaio() {
+        return raio;
     }
 
     /**
      * Seta o diâmetro do círculo
-     * @param diametro 
+     * @param raio 
      */
-    public void setDiametro(double diametro) {
-        this.diametro = diametro;
+    public void setRaio(double raio) {
+        this.raio = raio;
     }
     
 }
