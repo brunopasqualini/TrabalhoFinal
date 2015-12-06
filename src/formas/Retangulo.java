@@ -1,5 +1,7 @@
 package formas;
 
+import java.awt.Color;
+
 /**
  * Classe que representa um retângulo
  * @author Bruno
@@ -19,11 +21,12 @@ public class Retangulo extends Forma{
     /**
      * Construtor
      * @param descricao - Descrição do retângulo
+     * @param cor       - Cor do retângulo
      * @param altura    - Largura do retângulo
      * @param largura   - Largura do retângulo
      */
-    public Retangulo(String descricao, double altura, double largura) {
-        super(descricao);
+    public Retangulo(String descricao, Color cor, double altura, double largura) {
+        super(descricao, cor);
         this.altura = altura;
         this.largura = largura;
     }

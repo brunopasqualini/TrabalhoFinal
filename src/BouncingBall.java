@@ -43,6 +43,7 @@ public class BouncingBall {
             while (true) {
 
                 //Movimenta a barra, caso nao esteja na parede
+                System.out.println(posicaoHorizontalBarra);
                 if (StdDraw.isKeyPressed(KeyEvent.VK_LEFT) && posicaoHorizontalBarra >= -0.75) {
                     posicaoHorizontalBarra -= 0.02;
                 } 

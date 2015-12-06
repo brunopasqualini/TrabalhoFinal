@@ -19,12 +19,12 @@ public abstract class Tela {
     /**
      * Escala X da tela[min, max]
      */
-    protected double[] escalaX;
+    protected final double[] escalaX;
 
     /**
      * Escala Y da tela[min, max]
      */
-    protected double[] escalaY;
+    protected final double[] escalaY;
 
     /**
      * Construtor
@@ -40,7 +40,7 @@ public abstract class Tela {
     /**
      * Método para renderizar os elementos na tela
      */
-    protected abstract void imprime();
+    public abstract void imprime();
 
     /**
      * Método que é chamado quando a tela é criada.
@@ -90,7 +90,7 @@ public abstract class Tela {
         }
         else if(forma instanceof Circulo){
             Circulo circulo = (Circulo) forma;
-            StdDraw.filledCircle(forma.getX(), forma.getY(), circulo.getRaio());
+            StdDraw.filledCircle(forma.getX(), forma.getY(), circulo.getDiametro());
         }
     }
 }

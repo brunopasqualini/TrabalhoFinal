@@ -1,5 +1,7 @@
 package formas;
 
+import java.awt.Color;
+
 /**
  * Classe que representa um círculo
  * @author Bruno
@@ -7,34 +9,35 @@ package formas;
 public class Circulo extends Forma{
     
     /**
-     * Raio do círculo
+     * Diâmetro do círculo
      */
-    private double raio;
+    private double diametro;
     
     /**
      * Construtor
-     * @param descricao - Descrição da círculo
-     * @param raio      - Raio do círculo
+     * @param descricao - Descrição do círculo
+     * @param cor       - Cor do círculo
+     * @param diametro  - Diâmetro do círculo
      */
-    public Circulo(String descricao, double raio) {
-        super(descricao);
-        this.raio = raio;
+    public Circulo(String descricao, Color cor, double diametro) {
+        super(descricao, cor);
+        this.diametro = diametro;
     }
 
     /**
-     * Retorna o raio do círculo
+     * Retorna o diâmetro do círculo
      * @return 
      */
-    public double getRaio() {
-        return raio;
+    public double getDiametro() {
+        return diametro;
     }
 
     /**
-     * Seta o raio do círculo
-     * @param raio 
+     * Seta o diâmetro do círculo
+     * @param diametro 
      */
-    public void setRaio(double raio) {
-        this.raio = raio;
+    public void setDiametro(double diametro) {
+        this.diametro = diametro;
     }
     
 }

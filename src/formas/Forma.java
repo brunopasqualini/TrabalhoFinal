@@ -31,9 +31,11 @@ public abstract class Forma {
     /**
      * Construtor
      * @param descricao - Descrição da forma
+     * @param cor       - Cor da forma
      */
-    public Forma(String descricao) {
+    public Forma(String descricao, Color cor) {
         this.descricao = descricao;
+        this.cor       = cor;
     }
 
     /**
