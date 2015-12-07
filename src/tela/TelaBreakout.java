@@ -15,7 +15,7 @@ public class TelaBreakout extends Tela{
     /**
      * Tempo para próxima renderização em millisegundos
      */
-    private int tempoRenderizacao;
+    private int renderTime;
 
     /**
      * Círculo
@@ -35,7 +35,7 @@ public class TelaBreakout extends Tela{
         //Formas iniciais
         this.addForma(this._bottomBar = new Retangulo(StdDraw.RED, 0.055, 0.25))
             .addForma(this._circle    = this.getNewCirculo());
-        
+
         this._bottomBar.setY(-0.999);
         this._circle.setCor(StdDraw.BLUE).setVelocidadeX(0.015).setVelocidadeY(0.023);
     }
@@ -45,42 +45,73 @@ public class TelaBreakout extends Tela{
      */
     @Override
     public void imprime() {
+        this.renderTime = 15;
+        loopPrincipal:
         while(true){
             //Tecla esquerda
             if(this.canBarMoveLeft())
-                this._bottomBar.setX(this._bottomBar.getX() - 0.03);
+                this._bottomBar.setX(this._bottomBar.getX() - 0.05);
             //Tecla Direita
             else if(this.canBarMoveRight())
-                this._bottomBar.setX(this._bottomBar.getX() +  0.03);
-            
+                this._bottomBar.setX(this._bottomBar.getX() +  0.05);
+
             for (Forma forma : this.getFormasByType("circulo")) {
                 Circulo c = (Circulo) forma;
-                //Verifica colisão com a parede, inverte o movimento
+                //Verifica colisão com a parede
                 if(this.canCircleMoveHorizontal(c))
                     c.setVelocidadeX(-c.getVelocidadeX());
-                //Verifica colisão com o teto e chão, inverte o movimento
-                if(this.canCircleMoveVertical(c))
-                    c.setVelocidadeY(-c.getVelocidadeY());                    
-                
+                //Verifica colisão com o teto
+                if(this.canCircleMoveUp(c))
+                    c.setVelocidadeY(-c.getVelocidadeY());
+                //Verifica colisão com a barra
+                else if(this.checkCollisionCircleBar(c)){
+                    c.setVelocidadeY(-c.getVelocidadeY());
+                    this.renderTime -= 0.5;
+                    this.addForma(this.getNewCirculo());
+                }
+                //Verifica colisão com o chão
+                else if(!this.canCircleMoveDown(c)){
+                    break loopPrincipal;
+                }
                 c.setX(c.getX() + c.getVelocidadeX()).setY(c.getY() + c.getVelocidadeY());
             }
-            this.addForma(this.getNewCirculo());
-            
-            StdDraw.clear();
+            StdDraw.clear(formas.size() % (NumberUtil.random(4, 20)) == 0 ? StdDraw.getRandomColor() : StdDraw.WHITE);
             for (Forma forma : formas) {
                 this.imprimeForma(forma);
             }
-            StdDraw.show(17);
+            StdDraw.show(this.renderTime);
         }
+        StdDraw.picture(0, 0, "res/efeito.png", 2, 1.2);
+        StdDraw.show(this.renderTime);
     }
 
     /**
-     * Verifica se pode mover o círculo verticalmente
+     * Verifica se pode mover o círculo para cima
      * @param circle - Círculo
      * @return
      */
-    private boolean canCircleMoveVertical(Circulo circle){
-        return Math.abs(circle.getY()) > this.escalaY[1] - circle.getRaio();
+    private boolean canCircleMoveUp(Circulo circle){
+        return circle.getY() > this.escalaY[1] - circle.getRaio();
+    }
+    
+    /**
+     * Verifica se pode mover o círculo para baixo
+     * @param circle - Círculo
+     * @return
+     */
+    private boolean canCircleMoveDown(Circulo circle){
+        return circle.getY() > this.escalaY[0] + circle.getRaio();
+    }
+
+    /**
+     * Verifica se o círculo colidiu com a barra
+     * @param circle - Círculo
+     * @return
+     */
+    private boolean checkCollisionCircleBar(Circulo circle){
+        return circle.getY() - circle.getRaio() <= this.escalaY[0] + circle.getRaio() && 
+               circle.getX() < this._bottomBar.getX() + this._bottomBar.getLargura() &&
+               circle.getX() > this._bottomBar.getX() - this._bottomBar.getLargura();
     }
 
     /**
@@ -123,7 +154,7 @@ public class TelaBreakout extends Tela{
     private boolean isRightKeyPressed(){
         return StdDraw.isKeyPressed(KeyEvent.VK_RIGHT) || StdDraw.isKeyPressed(KeyEvent.VK_D);
     }
-    
+
     /**
      * Retorna um novo círculo
      * @return
